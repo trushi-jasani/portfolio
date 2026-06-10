@@ -3,6 +3,8 @@
 // Update this file to personalize your portfolio details.
 // ============================================================
 
+import { Certificate } from "crypto";
+
 export interface PersonalDetails {
   name: string;
   initials: string;
@@ -21,6 +23,15 @@ export interface AboutPillar {
   icon: string;
   title: string;
   body: string;
+}
+export interface Certification {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  image: string;
+  credentialUrl?: string;
+  status: "Completed" | "Participation";
 }
 
 export interface AboutSection {
@@ -52,6 +63,7 @@ export interface PortfolioConfig {
   personalDetails: PersonalDetails;
   aboutSection: AboutSection;
   skills: SkillCategory[];
+  certifications: Certification[];
   projects: Project[];
   drawings: string[];
 }
@@ -63,10 +75,10 @@ export interface PortfolioConfig {
 export const portfolioData: PortfolioConfig = {
   personalDetails: {
     name: "Trushi J.",
-    initials: "TJ",
+    initials: "<TJ />",
     subtitle: "IT Engineering Student",
     headerSummary:
-      "Third-year IT student , Gujarat · Building scalable systems, contributing to open source, and exploring the intersection of algorithms and elegant design.",
+      "Third-year IT student in Nadiad , Gujarat · Building scalable systems, contributing to open source, and exploring the intersection of algorithms and elegant design.",
     links: {
       github: "https://github.com/trushi-jasani",
       linkedin: "https://linkedin.com/in/trushij",
@@ -133,53 +145,71 @@ export const portfolioData: PortfolioConfig = {
   ],
 
   projects: [
-    {
-      id: "devboard",
-      title: "DevBoard — Engineering Task Manager",
-      shortDesc:
-        "A full-stack MERN project management platform with real-time collaboration, role-based permissions, and sprint analytics.",
-      longDesc:
-        "DevBoard is a production-grade task management system built specifically for small engineering teams. It supports kanban boards, sprint planning, burndown chart generation, and real-time notification delivery via WebSockets. The auth system uses refresh/access JWT token rotation to minimize attack surface.",
-      problemStatement:
-        "Most task managers are generic productivity tools that don't speak the language of software teams — no concept of sprints, velocity, or PR-linked tasks. Small engineering teams end up managing their work in spreadsheets or paying for expensive enterprise tools.",
-      solution:
-        "Built a purpose-specific platform using the MERN stack with a WebSocket layer (Socket.io) for real-time board updates. Implemented a role-permission matrix (Admin / Developer / Viewer) at the Express middleware level. Designed a MongoDB schema that keeps sprint data normalized while keeping task read latency under 50ms using compound indexes.",
-      toolsUsed: [
-        "React",
-        "Node.js",
-        "Express",
-        "MongoDB",
-        "Socket.io",
-        "JWT",
-        "Tailwind CSS",
-        "Vercel",
-      ],
-      thumbnailPath: "/assets/projects/devboard.png",
+ {
+  id: "scholarai",
+  title: "ScholarAI — AI-Powered Scholarship Discovery Platform",
+  shortDesc:
+    "A full-stack platform that automates scholarship discovery, eligibility matching, and AI-generated SOP creation for students.",
+
+  longDesc:
+    "ScholarAI is an intelligent scholarship recommendation system that helps students discover funding opportunities tailored to their academic and personal profiles. The platform automates scholarship aggregation through web scraping, performs strict eligibility validation, and generates personalized Statements of Purpose using large language models.",
+
+  problemStatement:
+    "Finding relevant scholarships is time-consuming because opportunities are distributed across multiple sources and eligibility requirements vary significantly. Students often apply to unsuitable scholarships or miss opportunities they qualify for.",
+
+  solution:
+    "Developed a React and Node.js based platform that automatically collects scholarship data, filters opportunities using rule-based eligibility matching, and ranks results according to user profiles. Integrated Google Gemini and OpenAI APIs to generate personalized SOPs, reducing application preparation time and improving the overall scholarship application experience.",
+
+  toolsUsed: [
+    "React",
+    "Node.js",
+    "Express",
+    "SQLite",
+    "Puppeteer",
+    "Cheerio",
+    "Google Gemini API",
+    "OpenAI API",
+    "Axios",
+    "Nodemailer",
+  ],
+      thumbnailPath: "/assets/projects/ScholarAI.png",
       githubUrl: "https://github.com/trushij/devboard",
       liveUrl: "https://devboard-demo.vercel.app",
       featured: true,
       year: "2024",
     },
     {
-      id: "rain-detector",
-      title: "AutoRain — IoT Rain Detection System",
-      shortDesc:
-        "An ESP32-based IoT system that detects rainfall and triggers automated relay closures with cloud-logging via MQTT.",
-      longDesc:
-        "AutoRain uses a resistive rain sensor wired to an ESP32 microcontroller. Sensor readings are normalized and thresholded, triggering hardware relay switches (for awning motors, window closers) and publishing an MQTT event to an AWS IoT Core broker. A lightweight Node.js microservice consumes the MQTT stream and writes structured logs to a PostgreSQL time-series table, accessible via a simple dashboard.",
-      problemStatement:
-        "Manually closing windows and retracting awnings during unexpected rain events wastes time and often results in water damage. Existing commercial solutions are expensive and non-customizable.",
-      solution:
-        "Designed a sub-₹600 hardware assembly using off-the-shelf components. Wrote firmware in C++ (Arduino framework) with debounce logic and Wi-Fi reconnection handling. Connected to AWS IoT Core over TLS/MQTT for reliable cloud delivery even on intermittent home Wi-Fi. The dashboard queries the PostgreSQL table to show rain frequency patterns by week.",
-      toolsUsed: [
-        "ESP32",
-        "C++ (Arduino)",
-        "MQTT",
-        "AWS IoT Core",
-        "Node.js",
-        "PostgreSQL",
-        "React",
-      ],
+  id: "noteflow",
+
+  title: "NoteFlow — MERN Notes Management Platform",
+
+  shortDesc:
+    "A full-stack MERN notes application featuring a modern glassmorphism UI, secure REST APIs, rate limiting, and real-time responsive user experience.",
+
+  longDesc:
+    "NoteFlow is a modern note-taking and management platform built with the MERN stack. The application provides a premium SaaS-inspired user experience through a responsive glassmorphism interface, smooth animations, and secure backend services. Users can create, organize, edit, and delete notes while benefiting from optimized API performance through Redis-powered caching and rate limiting.",
+
+  problemStatement:
+    "Many note-taking applications either focus on functionality without a polished user experience or provide attractive interfaces without scalable backend architecture. Users need a lightweight yet modern platform that combines intuitive note management with performance, security, and responsiveness.",
+
+  solution:
+    "Developed a full-stack notes management platform using React, Node.js, Express, and MongoDB. Implemented complete CRUD operations through RESTful APIs, integrated MongoDB for persistent data storage, and enhanced API security using Upstash Redis-based rate limiting. Designed a premium glassmorphism interface with Tailwind CSS and Framer Motion animations, ensuring a smooth and responsive experience across desktop and mobile devices.",
+
+  toolsUsed: [
+    "React 19",
+    "Vite",
+    "Tailwind CSS",
+    "Framer Motion",
+    "React Router",
+    "Axios",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "Upstash Redis",
+    "REST API",
+    "JWT",
+  ],
       thumbnailPath: "/assets/projects/autorain.png",
       githubUrl: "https://github.com/trushij/autorain",
       liveUrl: "",
@@ -187,24 +217,31 @@ export const portfolioData: PortfolioConfig = {
       year: "2024",
     },
     {
-      id: "algo-docs",
-      title: "Algo Docs Contribution — Bellman-Ford",
-      shortDesc:
-        "Open-source documentation authored for the Bellman-Ford Algorithm in the community Algo repository (issue #2359).",
-      longDesc:
-        "Contributed a complete, production-ready documentation page for the Bellman-Ford shortest path algorithm to the Algo open-source repository. The doc covers algorithm intuition, step-by-step edge relaxation, all three time-complexity cases, pseudocode, and a working Python implementation, all formatted to match the Docusaurus-based site's conventions exactly.",
-      problemStatement:
-        "The Algo repository was missing documentation for Bellman-Ford despite it being a core graph algorithm tested in competitive programming and system design interviews. Existing informal resources online had incorrect Big-O claims for the best-case.",
-      solution:
-        "Studied the repository's existing Docusaurus markdown patterns and formatting conventions before writing. Corrected the widely circulated misconception about best-case complexity. Stripped LaTeX delimiters (unsupported by the site renderer) in favor of plain-text notation. PR was reviewed, approved, and merged.",
-      toolsUsed: [
-        "Markdown",
-        "Docusaurus",
-        "Python",
-        "Git",
-        "GitHub",
-        "Graph Algorithms",
-      ],
+  id: "paintapp",
+  title: "PaintApp — Java Swing Drawing Application",
+
+  shortDesc:
+    "A desktop drawing application built with Java Swing featuring freehand drawing, shape tools, flood fill, text editing, and undo/redo functionality.",
+
+  longDesc:
+    "PaintApp is a lightweight raster graphics editor developed using Java Swing and AWT. The application provides essential drawing and editing tools, enabling users to create digital artwork through freehand drawing, geometric shapes, text insertion, flood fill operations, and image export capabilities.",
+
+  problemStatement:
+    "Many beginner-friendly drawing applications lack customization options and are often dependent on external libraries. The goal was to build a standalone desktop graphics editor that demonstrates Java GUI development, event handling, and graphics rendering concepts while providing core image editing functionality.",
+
+  solution:
+    "Developed a Java Swing-based painting application with an interactive canvas and a collection of drawing tools including pen, eraser, geometric shapes, text insertion, and flood-fill operations. Implemented undo/redo functionality using action history management, integrated color selection through quick-access palettes, and enabled artwork export as PNG files for persistent storage.",
+
+  toolsUsed: [
+    "Java",
+    "Java Swing",
+    "AWT",
+    "Graphics2D",
+    "Event Handling",
+    "File I/O",
+    "OOP",
+    "PNG Image Processing",
+  ],
       thumbnailPath: "/assets/projects/algodocs.png",
       githubUrl: "https://github.com/TheAlgorithms/Algo/issues/2359",
       liveUrl: "",
@@ -212,69 +249,84 @@ export const portfolioData: PortfolioConfig = {
       year: "2024",
     },
     {
-      id: "dsa-roadmap",
-      title: "DSA Roadmap — Student Learning App",
-      shortDesc:
-        "A level-adaptive DSA learning app featuring diagnostic quizzes, topic checklists, progress tracking, and company-topic mapping.",
-      longDesc:
-        "A web application designed to give IT students a structured, level-aware path through data structures and algorithms. Users select Beginner, Intermediate, or Advanced level, complete a diagnostic quiz to validate placement, then work through a progressive checklist of topics. A confidence heatmap tracks subjective mastery and a streak system encourages daily practice.",
-      problemStatement:
-        "Most DSA study resources are either too theory-heavy (textbooks) or unstructured (random LeetCode grinding). Students lack a clear, adaptive roadmap that knows where they are and shows exactly what to learn next.",
-      solution:
-        "Built with Next.js and a static data layer (no backend required for MVP). Implemented localStorage-persisted progress state. Diagnostic quiz uses a weighted scoring algorithm to validate self-reported level. Company-topic mapping renders a filterable matrix showing which topics are tested by which companies.",
-      toolsUsed: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "React",
-        "localStorage",
-        "Vercel",
-      ],
+  id: "smartraindetector",
+
+  title: "Smart Rain Detector — Automated Cloth Protection System",
+
+  shortDesc:
+    "An Arduino-based automation system that detects rainfall and automatically moves clothes under shelter to prevent them from getting wet.",
+
+  longDesc:
+    "Smart Rain Detector is an IoT-based automation project designed to protect drying clothes from unexpected rainfall. Using a rain sensor, Arduino microcontroller, motor driver, and DC motor, the system continuously monitors weather conditions and automatically moves clothes under a protective cover when rain is detected. Once the weather becomes clear, the clothes are returned outside for continued drying.",
+
+  problemStatement:
+    "During monsoon seasons, sudden rainfall often causes clothes left outside for drying to become wet again. Constant monitoring is inconvenient and time-consuming, especially when no one is available at home to react immediately.",
+
+  solution:
+    "Developed an Arduino-based automated cloth protection system that uses a rain sensor to detect rainfall in real time. When rain is detected, the microcontroller activates a motor through an L298N motor driver to retract the clothes under a shelter. Once rainfall stops, the system automatically reverses the motor direction to move the clothes back outside for drying. The prototype was successfully tested under real-world conditions and demonstrates practical IoT-based home automation.",
+
+  toolsUsed: [
+    "Arduino",
+    "Embedded C",
+    "Rain Sensor",
+    "L298N Motor Driver",
+    "DC Motor",
+    "IoT",
+    "Electronics Prototyping",
+    "Automation Systems",
+  ],
       thumbnailPath: "/assets/projects/dsa-roadmap.png",
       githubUrl: "https://github.com/trushij/dsa-roadmap",
       liveUrl: "https://dsa-roadmap.vercel.app",
       featured: false,
       year: "2025",
     },
-    {
-      id: "portfolio",
-      title: "This Portfolio — TJ",
-      shortDesc:
-        "Personal engineering portfolio built with Next.js 14, Tailwind CSS, TypeScript, and Framer Motion.",
-      longDesc:
-        "A clean, performance-optimized personal portfolio site featuring animated section reveals, a slide-over project detail drawer, a masonry art gallery with lightbox, and a fully responsive design system built around a soft rose/neutral palette.",
-      problemStatement:
-        "Generic portfolio templates don't reflect an engineer's design sensibility or technical depth. I needed a portfolio that felt crafted — not cloned.",
-      solution:
-        "Designed and built entirely from scratch. The data layer is fully decoupled into a single TypeScript config file so content updates never require touching component code. Project detail drawers avoid full-page navigations and keep users engaged on the same surface.",
-      toolsUsed: [
-        "Next.js 14",
-        "TypeScript",
-        "Tailwind CSS",
-        "Framer Motion",
-        "Vercel",
-      ],
-      thumbnailPath: "/assets/projects/portfolio.png",
-      githubUrl: "https://github.com/trushij/portfolio",
-      liveUrl: "https://trushij.vercel.app",
-      featured: false,
-      year: "2025",
-    },
+    
+   
   ],
-
+   certifications: [
+  {
+    id: "ccna",
+    title: "CCNA: Introduction to Networks",
+    issuer: "Cisco Networking Academy",
+    date: "2025",
+    credentialUrl: "",
+    image: "/assets/certificates/ccna.png",
+    status: "Completed",
+  },
+  {
+    id: "mysql",
+    title: "MySQL 8.0 Database Developer",
+    issuer: "Oracle",
+    date: "2025",
+    credentialUrl: "",
+    image: "/assets/certificates/mysql.png",
+    status: "Completed",
+  },
+  {
+    id: "aicte",
+    title: "AICTE Virtual Internship",
+    issuer: "AICTE",
+    date: "2025",
+    credentialUrl: "",
+    image: "/assets/certificates/aicte.png",
+    status: "Completed",
+  },
+],
   drawings: [
-    "/assets/drawings/image1.jpeg",
+  
     "/assets/drawings/image2.jpeg",
     "/assets/drawings/image3.jpeg",
     "/assets/drawings/image4.jpeg",
-    "/assets/drawings/image5.jpeg",
+    // "/assets/drawings/image5.jpeg",
     "/assets/drawings/image6.jpeg",
-    "/assets/drawings/image7.jpeg",
+    // "/assets/drawings/image7.jpeg",
     "/assets/drawings/image8.jpeg",
     "/assets/drawings/image9.jpeg",
     "/assets/drawings/image10.jpeg",
-    "/assets/drawings/image11.jpeg",
-    "/assets/drawings/image12.jpeg",
+    "/assets/drawings/image11.jpeg"
+    ,"/assets/drawings/image1.jpeg",
+    // "/assets/drawings/image12.jpeg",
     "/assets/drawings/image13.jpeg",
   ],
 };
