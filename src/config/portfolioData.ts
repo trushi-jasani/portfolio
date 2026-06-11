@@ -3,8 +3,6 @@
 // Update this file to personalize your portfolio details.
 // ============================================================
 
-import { Certificate } from "crypto";
-
 export interface PersonalDetails {
   name: string;
   initials: string;
@@ -74,8 +72,8 @@ export interface PortfolioConfig {
 
 export const portfolioData: PortfolioConfig = {
   personalDetails: {
-    name: "Trushi J.",
-    initials: "<TJ />",
+    name: "Trushi Jasani",
+    initials: "",
     subtitle: "IT Engineering Student",
     headerSummary:
       "Third-year IT student in Nadiad , Gujarat · Building scalable systems, contributing to open source, and exploring the intersection of algorithms and elegant design.",
@@ -289,28 +287,29 @@ export const portfolioData: PortfolioConfig = {
     id: "ccna",
     title: "CCNA: Introduction to Networks",
     issuer: "Cisco Networking Academy",
-    date: "2025",
+    date: "2026",
     credentialUrl: "",
     image: "/assets/certificates/ccna.png",
     status: "Completed",
   },
   {
-    id: "mysql",
-    title: "MySQL 8.0 Database Developer",
-    issuer: "Oracle",
+    id: "GDG",
+    title: "CodeQuest ICPC : DDU Edition",
+    issuer: "GDG",
     date: "2025",
     credentialUrl: "",
-    image: "/assets/certificates/mysql.png",
-    status: "Completed",
+    image: "/assets/certificates/gdg.png",
+    status: "Participation",
   },
+  
   {
-    id: "aicte",
-    title: "AICTE Virtual Internship",
+    id: "hacthon",
+    title: "DuHack's Hackthon",
     issuer: "AICTE",
     date: "2025",
     credentialUrl: "",
-    image: "/assets/certificates/aicte.png",
-    status: "Completed",
+    image: "/assets/certificates/duhacks.png",
+    status: "Participation",
   },
 ],
   drawings: [
