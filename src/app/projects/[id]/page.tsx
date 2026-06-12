@@ -6,13 +6,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Code2,
-  GitHub,
   ExternalLink,
   Database,
   Server,
   Settings,
 } from "lucide-react";
-
 interface ProjectDetailProps {
   params: {
     id: string;
@@ -135,7 +133,7 @@ export default function ProjectDetail({
             rel="noreferrer"
             className="flex items-center gap-2 bg-[#2C1A22] text-white px-8 py-4 rounded-2xl font-medium hover:bg-[#6B3F52] transition-colors shadow-lg"
           >
-            <GitHub className="w-5 h-5" />
+            <Code2 className="w-5 h-5" />
             View Source Code
           </a>
 
