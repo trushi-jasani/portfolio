@@ -4,12 +4,19 @@
 
 /* ─── Custom Properties ─────────────────────────────────── */
 :root {
-  --rose-glow: rgba(244, 114, 182, 0.07);
-  --rose-accent: #f43f5e;
-  --rose-soft: #fda4af;
+  --emerald-glow: rgba(16, 185, 129, 0.07);
+  --emerald-accent: #10b981;
+  --emerald-soft: #6ee7b7;
   --zinc-base: #fafafa;
   --ink: #18181b;
   --ink-muted: #52525b;
+}
+
+.dark {
+  --emerald-glow: rgba(16, 185, 129, 0.15);
+  --zinc-base: #09090b;
+  --ink: #f4f4f5;
+  --ink-muted: #a1a1aa;
 }
 
 /* ─── Base resets ────────────────────────────────────────── */
@@ -20,7 +27,7 @@ html {
 }
 
 ::selection {
-  background-color: #fda4af;
+  background-color: var(--emerald-soft);
   color: #18181b;
 }
 
@@ -28,100 +35,193 @@ html {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #f4f4f5;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #fda4af;
+  background: var(--emerald-soft);
   border-radius: 9999px;
 }
 
 /* ─── Keyframe animations ────────────────────────────────── */
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-28px) scale(1.04); }
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-28px) scale(1.04);
+  }
 }
 
 @keyframes float-slower {
-  0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
-  50% { transform: translateY(-18px) scale(1.02) rotate(3deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-18px) scale(1.02) rotate(3deg);
+  }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(100%); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-out-right {
-  from { transform: translateX(0);    opacity: 1; }
-  to   { transform: translateX(100%); opacity: 0; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50%       { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes draw-line {
-  from { width: 0; }
-  to   { width: 100%; }
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 /* ─── Animation utilities ────────────────────────────────── */
 @layer utilities {
-  .animate-float-slow   { animation: float-slow   8s ease-in-out infinite; }
-  .animate-float-slower { animation: float-slower 12s ease-in-out infinite; }
-  .animate-fade-up      { animation: fade-up   0.6s ease-out forwards; }
-  .animate-fade-in      { animation: fade-in   0.4s ease-out forwards; }
-  .animate-slide-in-right  { animation: slide-in-right  0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
-  .animate-slide-out-right { animation: slide-out-right 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
-  .animate-pulse-glow   { animation: pulse-glow 3s ease-in-out infinite; }
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
 
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
-  .delay-300 { animation-delay: 0.3s; }
-  .delay-400 { animation-delay: 0.4s; }
-  .delay-500 { animation-delay: 0.5s; }
+  .animate-float-slower {
+    animation: float-slower 12s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-out-right {
+    animation: slide-out-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
 
   /* Section anchor offsets for sticky nav */
-  .scroll-mt-nav { scroll-margin-top: 5rem; }
+  .scroll-mt-nav {
+    scroll-margin-top: 5rem;
+  }
 
   /* Hover card lift */
   .card-lift {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+
   .card-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(244,63,94,0.12);
+    box-shadow: 0 20px 40px -12px rgba(16, 185, 129, 0.12);
   }
 
   /* Glass surface */
   .glass {
-    background: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
+  .dark .glass {
+    background: rgba(9, 9, 11, 0.7);
+  }
+
   /* Skill badge */
   .skill-badge {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium
-           bg-rose-50 text-rose-700 border border-rose-100
-           transition-all duration-200 hover:scale-105 hover:bg-rose-100 hover:shadow-sm;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100 transition-all duration-200 hover:scale-105 hover:bg-emerald-100 hover:shadow-sm dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 dark:hover:bg-emerald-500/20;
   }
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, #f43f5e 0%, #fb923c 100%);
+    background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -141,8 +241,13 @@ html {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @layer utilities {

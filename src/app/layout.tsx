@@ -4,7 +4,6 @@ import "./globals.css";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import { portfolioData } from "@/config/portfolioData";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -43,8 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
-      <body className="bg-zinc-50 text-zinc-900 antialiased font-[var(--font-dm-sans)]">
-        <CustomCursor />
+      <body className="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 antialiased font-[var(--font-dm-sans)] transition-colors duration-300">
         <Nav />
         <main>{children}</main>
         <Footer />

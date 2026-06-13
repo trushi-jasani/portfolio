@@ -45,20 +45,20 @@ export function ProjectDrawer({
       />
 
       {/* Drawer panel */}
-      <aside className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xl bg-white shadow-2xl flex flex-col animate-slide-in-right">
+      <aside className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xl bg-white dark:bg-zinc-900 shadow-2xl flex flex-col animate-slide-in-right">
         {/* Header */}
-        <div className="flex items-start justify-between p-6 border-b border-zinc-100">
+        <div className="flex items-start justify-between p-6 border-b border-zinc-100 dark:border-zinc-800">
           <div className="flex-1 pr-4">
-            <span className="text-xs font-[var(--font-dm-mono)] text-rose-500 uppercase tracking-widest">
+            <span className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest">
               {project.year}
             </span>
-            <h2 className="font-[var(--font-cormorant)] text-2xl font-semibold text-zinc-900 mt-1 leading-snug">
+            <h2 className="font-[var(--font-cormorant)] text-2xl font-semibold text-zinc-900 dark:text-zinc-50 mt-1 leading-snug">
               {project.title}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors"
+            className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 transition-colors"
             aria-label="Close"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -70,19 +70,19 @@ export function ProjectDrawer({
         {/* Scrollable body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-7">
           {/* Short description */}
-          <p className="text-zinc-600 leading-relaxed font-[var(--font-dm-sans)] text-sm">
+          <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed font-[var(--font-dm-sans)] text-sm">
             {project.longDesc}
           </p>
 
           {/* Problem */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                 Problem Statement
               </h3>
             </div>
-            <p className="text-sm text-zinc-600 leading-relaxed pl-3.5 border-l border-rose-200">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed pl-3.5 border-l border-emerald-200">
               {project.problemStatement}
             </p>
           </div>
@@ -90,12 +90,12 @@ export function ProjectDrawer({
           {/* Solution */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                 Solution & Architecture
               </h3>
             </div>
-            <p className="text-sm text-zinc-600 leading-relaxed pl-3.5 border-l border-rose-200">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed pl-3.5 border-l border-emerald-200">
               {project.solution}
             </p>
           </div>
@@ -103,8 +103,8 @@ export function ProjectDrawer({
           {/* Tech stack */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <h3 className="text-xs font-[var(--font-dm-mono)] uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                 Stack
               </h3>
             </div>
@@ -118,11 +118,11 @@ export function ProjectDrawer({
           </div>
 
           {/* Collaborate CTA */}
-          <div className="rounded-2xl bg-rose-50 border border-rose-100 p-5">
-            <p className="text-sm font-medium text-zinc-700 mb-1">
+          <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-5">
+            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
               Want to collaborate or contribute?
             </p>
-            <p className="text-xs text-zinc-500 mb-4 leading-relaxed">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed">
               Feel free to open an issue, submit a PR on GitHub, or reach out directly via email — I&apos;m always happy to build with others.
             </p>
             <div className="flex flex-wrap gap-2">
@@ -141,7 +141,7 @@ export function ProjectDrawer({
               )}
               <a
                 href={`mailto:${links.email}`}
-                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-rose-500 text-white hover:bg-rose-600 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
@@ -154,7 +154,7 @@ export function ProjectDrawer({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-zinc-200 text-zinc-700 hover:border-zinc-400 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800/80 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 transition-colors"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" />
@@ -181,33 +181,33 @@ function ProjectCard({
   return (
     <button
       onClick={onClick}
-      className="group text-left w-full rounded-2xl border border-zinc-200/80 bg-white/60 backdrop-blur-sm overflow-hidden card-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+      className="group text-left w-full rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm overflow-hidden card-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
     >
       {/* Thumbnail area */}
-      <div className="relative h-44 bg-gradient-to-br from-rose-50 via-zinc-50 to-zinc-100 overflow-hidden dot-grid">
+      <div className="relative h-44 bg-gradient-to-br from-emerald-50 via-zinc-50 dark:via-zinc-900 to-zinc-100 dark:to-zinc-800 overflow-hidden dot-grid">
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-[var(--font-cormorant)] text-6xl font-bold text-zinc-100 group-hover:text-rose-100 transition-colors select-none">
+          <span className="font-[var(--font-cormorant)] text-6xl font-bold text-zinc-100 group-hover:text-emerald-100 transition-colors select-none">
             {project.title.slice(0, 2).toUpperCase()}
           </span>
         </div>
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-          <span className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-medium text-zinc-700 shadow-sm">
+        <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+          <span className="bg-white dark:bg-zinc-900/90 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 shadow-sm">
             View Details →
           </span>
         </div>
         {/* Year tag */}
-        <span className="absolute top-3 right-3 text-[10px] font-[var(--font-dm-mono)] text-zinc-400 bg-white/80 rounded-full px-2.5 py-0.5">
+        <span className="absolute top-3 right-3 text-[10px] font-[var(--font-dm-mono)] text-zinc-400 bg-white dark:bg-zinc-900/80 rounded-full px-2.5 py-0.5">
           {project.year}
         </span>
       </div>
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-[var(--font-cormorant)] text-xl font-semibold text-zinc-800 mb-1.5 leading-snug">
+        <h3 className="font-[var(--font-cormorant)] text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-1.5 leading-snug">
           {project.title}
         </h3>
-        <p className="text-xs text-zinc-500 leading-relaxed mb-4 font-[var(--font-dm-sans)]">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 font-[var(--font-dm-sans)]">
           {project.shortDesc}
         </p>
 
@@ -242,14 +242,14 @@ export default function Projects() {
         {/* Section header */}
         <div className="flex items-center gap-4 mb-16">
           <div>
-            <p className="text-xs font-[var(--font-dm-mono)] text-rose-500 uppercase tracking-widest mb-1">
+            <p className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest mb-1">
               02 / What I&apos;ve built
             </p>
-            <h2 className="font-[var(--font-cormorant)] text-5xl font-semibold text-zinc-900">
+            <h2 className="font-[var(--font-cormorant)] text-5xl font-semibold text-zinc-900 dark:text-zinc-50">
               Projects
             </h2>
           </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-rose-200 to-transparent ml-4 hidden md:block" />
+          <div className="flex-1 h-px bg-gradient-to-r from-emerald-200 to-transparent ml-4 hidden md:block" />
         </div>
 
         {/* Featured grid */}
@@ -267,7 +267,7 @@ export default function Projects() {
         <div className="flex justify-center">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-rose-500 transition-colors font-[var(--font-dm-mono)] group"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 transition-colors font-[var(--font-dm-mono)] group"
           >
             View all projects
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
