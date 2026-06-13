@@ -1,80 +1,135 @@
-// src/app/projects/[id]/page.tsx
-import { projects } from "@/config/portfolioData";
+
+
+import { portfolioData } from "@/config/portfolioData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Code2, Github, ExternalLink, Database, Server, Settings } from 'lucide-react';
+import {
+    Code2,
 
-export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
-    const project = projects.find(p => p.id === id);
+    ExternalLink,
+    Settings,
+    Calendar,
+} from "lucide-react";
 
-    if (!project) return notFound();
+interface PageProps {
+    params: {
+        id: string;
+    };
+}
+
+export default function ProjectDetail({ params }: PageProps) {
+    const project = portfolioData.projects.find(
+        (p) => p.id === params.id
+    );
+
+    if (!project) {
+        notFound();
+    }
 
     return (
-        <main className="min-h-screen bg-[#FFF5F7] text-[#2C1A22] py-20 px-6 md:px-12 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-[-100px] right-[-100px] w-96 h-96 bg-[#FFC2D4] opacity-20 blur-[100px] rounded-full" />
-            <div className="absolute bottom-[-100px] left-[-100px] w-96 h-96 bg-[#E05585] opacity-10 blur-[100px] rounded-full" />
+        <main className="min-h-screen bg-white dark:bg-zinc-950 py-24 px-6">
+            <div className="max-w-5xl mx-auto">
 
-            <Link href="/#projects" className="fixed top-8 left-8 bg-white/80 backdrop-blur-md border border-[#FFC2D4] text-[#E05585] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#FFE4EC] hover:scale-105 transition-all shadow-sm z-50">
-                &larr; Back to Projects
-            </Link>
+                {/* Back Button */}
+                <Link
+                    href="/projects"
+                    className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-rose-500 transition-colors mb-10"
+                >
+                    ← Back to Projects
+                </Link>
 
-            <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl border border-[#FFC2D4] rounded-[2rem] p-8 md:p-14 shadow-xl relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 p-8 opacity-[0.03] text-[200px] leading-none pointer-events-none select-none">{project.emoji}</div>
-
-                <p className="text-[11px] font-medium tracking-[2.5px] text-[#E05585] uppercase mb-4">{project.tag}</p>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#2C1A22] tracking-tight mb-8 leading-tight">{project.name}</h1>
-
-                <div className="flex flex-wrap gap-2 mb-12">
-                    {project.stack.map(tech => (
-                        <span key={tech} className="bg-white border border-[#FFC2D4] text-[#C43870] px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">
-                            {tech}
+                {/* Header */}
+                <div className="mb-12">
+                    <div className="flex items-center gap-2 mb-4">
+                        <Calendar className="w-4 h-4 text-rose-500" />
+                        <span className="text-sm text-zinc-500">
+                            {project.year}
                         </span>
-                    ))}
+                    </div>
+
+                    <h1 className="text-5xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
+                        {project.title}
+                    </h1>
+
+                    <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                        {project.longDesc}
+                    </p>
                 </div>
 
-                <div className="space-y-12 relative z-10">
-                    <section>
-                        <h2 className="text-xl font-semibold text-[#2C1A22] flex items-center gap-3 mb-4">
-                            <Settings className="w-6 h-6 text-[#E05585]" /> The Problem
-                        </h2>
-                        <p className="text-[#6B3F52] leading-relaxed text-lg">{project.situation} {project.task}</p>
-                    </section>
+                {/* Technologies */}
+                <section className="mb-12">
+                    <h2 className="flex items-center gap-2 text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-50">
+                        <Code2 className="w-5 h-5 text-rose-500" />
+                        Technologies Used
+                    </h2>
 
-                    <section className="bg-[#FFF5F7] p-8 rounded-2xl border border-[#FFC2D4]">
-                        <h2 className="text-xl font-semibold text-[#2C1A22] flex items-center gap-3 mb-4">
-                            <Server className="w-6 h-6 text-[#E05585]" /> System Architecture
-                        </h2>
-                        <p className="text-[#6B3F52] leading-relaxed text-lg">{project.architecture}</p>
-                    </section>
+                    <div className="flex flex-wrap gap-2">
+                        {project.toolsUsed.map((tool) => (
+                            <span
+                                key={tool}
+                                className="skill-badge"
+                            >
+                                {tool}
+                            </span>
+                        ))}
+                    </div>
+                </section>
 
-                    <section className="bg-[#FFF5F7] p-8 rounded-2xl border border-[#FFC2D4]">
-                        <h2 className="text-xl font-semibold text-[#2C1A22] flex items-center gap-3 mb-4">
-                            <Database className="w-6 h-6 text-[#E05585]" /> Database Modeling
-                        </h2>
-                        <p className="text-[#6B3F52] leading-relaxed text-lg">{project.database}</p>
-                    </section>
+                {/* Problem */}
+                <section className="mb-12">
+                    <h2 className="flex items-center gap-2 text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-50">
+                        <Settings className="w-5 h-5 text-rose-500" />
+                        Problem Statement
+                    </h2>
 
-                    <section className="bg-[#FFF5F7] p-8 rounded-2xl border border-[#FFC2D4]">
-                        <h2 className="text-xl font-semibold text-[#2C1A22] flex items-center gap-3 mb-4">
-                            <Code2 className="w-6 h-6 text-[#E05585]" /> Core Technical Challenges
-                        </h2>
-                        <p className="text-[#6B3F52] leading-relaxed text-lg">{project.challenges}</p>
-                    </section>
-                </div>
+                    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 bg-white dark:bg-zinc-900">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                            {project.problemStatement}
+                        </p>
+                    </div>
+                </section>
 
-                <div className="mt-16 pt-8 border-t border-[#FFC2D4] flex flex-wrap gap-4">
-                    <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-[#2C1A22] text-white px-8 py-4 rounded-2xl font-medium hover:bg-[#6B3F52] transition-colors shadow-lg">
-                        <Github className="w-5 h-5" /> View Source Code
+                {/* Solution */}
+                <section className="mb-12">
+                    <h2 className="flex items-center gap-2 text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-50">
+                        <Code2 className="w-5 h-5 text-rose-500" />
+                        Solution & Implementation
+                    </h2>
+
+                    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 bg-white dark:bg-zinc-900">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                            {project.solution}
+                        </p>
+                    </div>
+                </section>
+
+                {/* Links */}
+                <section className="flex flex-wrap gap-4 mt-16">
+
+                    <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-zinc-900 text-white hover:bg-zinc-700 transition-colors"
+                    >
+                        <Code2 className="w-4 h-4" />
+                        View Source
                     </a>
-                    {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-[#E05585] text-white px-8 py-4 rounded-2xl font-medium hover:bg-[#C43870] transition-colors shadow-lg shadow-[#E05585]/20">
-                            <ExternalLink className="w-5 h-5" /> Live Demo
+
+                    {project.liveUrl && (
+                        <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition-colors"
+                        >
+                            <ExternalLink className="w-4 h-4" />
+                            Live Demo
                         </a>
                     )}
-                </div>
+                </section>
             </div>
         </main>
     );
 }
+
