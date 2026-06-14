@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
+      className={`dark ${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body className="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 antialiased font-[var(--font-dm-sans)] transition-colors duration-300">
         <Nav />

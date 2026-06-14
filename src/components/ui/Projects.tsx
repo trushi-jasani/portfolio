@@ -40,12 +40,14 @@ export function ProjectDrawer({
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm animate-fade-in"
+        className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm animate-fade-in flex items-center justify-center p-4 sm:p-6"
         onClick={onClose}
-      />
-
-      {/* Drawer panel */}
-      <aside className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xl bg-white dark:bg-zinc-900 shadow-2xl flex flex-col animate-slide-in-right">
+      >
+        {/* Drawer panel */}
+        <aside 
+          className="relative w-full max-w-2xl max-h-[90vh] bg-white dark:bg-zinc-900 shadow-2xl rounded-2xl flex flex-col animate-fade-up overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
         {/* Header */}
         <div className="flex items-start justify-between p-6 border-b border-zinc-100 dark:border-zinc-800">
           <div className="flex-1 pr-4">
@@ -118,11 +120,11 @@ export function ProjectDrawer({
           </div>
 
           {/* Collaborate CTA */}
-          <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-5">
-            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+          <div className="rounded-2xl bg-emerald-500/10 border border-emerald-500/20 p-5">
+            <p className="text-sm font-medium text-zinc-50 mb-1">
               Want to collaborate or contribute?
             </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed">
+            <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
               Feel free to open an issue, submit a PR on GitHub, or reach out directly via email — I&apos;m always happy to build with others.
             </p>
             <div className="flex flex-wrap gap-2">
@@ -166,6 +168,7 @@ export function ProjectDrawer({
           </div>
         </div>
       </aside>
+      </div>
     </>
   );
 }
