@@ -3,6 +3,7 @@ import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import { portfolioData } from "@/config/portfolioData";
 
 const cormorant = Cormorant_Garamond({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

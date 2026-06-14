@@ -1,179 +1,145 @@
+"use client";
+import { useState } from "react";
 import { portfolioData } from "@/config/portfolioData";
 
 const skillIcons: Record<string, string> = {
-  "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  "JavaScript": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  "Java": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
   "C++": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+  "Java": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+  "JavaScript": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+  "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+  "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
   "SQL": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
-  "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+  "HTML5": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+  "CSS3": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
   "React": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+  "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
   "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
   "Express.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
   "MongoDB": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
   "PostgreSQL": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
   "MySQL": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
   "Redis": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-  "Prisma ORM": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
-  "Git & GitHub": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
-  "Docker": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-  "Vercel": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
-  "AWS (S3, EC2)": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
   "Linux": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-  "Postman": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
+  "Nginx": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg",
+  "Git & GitHub": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+  "AWS (S3, EC2)": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  "Vercel": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
 };
 
-// Hand-picked coordinates for the floating language orbs to prevent collision
-const floatPositions = [
-  { top: '10%', left: '15%' },
-  { top: '40%', left: '60%' },
-  { top: '25%', left: '80%' },
-  { top: '65%', left: '20%' },
-  { top: '75%', left: '70%' },
-  { top: '15%', left: '45%' },
-  { top: '50%', left: '30%' },
-];
+const skillColors: Record<string, string> = {
+  "C++": "#00599C",
+  "Java": "#007396",
+  "JavaScript": "#F7DF1E",
+  "TypeScript": "#3178C6",
+  "Python": "#3776AB",
+  "SQL": "#336791",
+  "HTML5": "#E34F26",
+  "CSS3": "#1572B6",
+  "React": "#61DAFB",
+  "Next.js": "#10b981",
+  "Tailwind CSS": "#06B6D4",
+  "Node.js": "#339933",
+  "Express.js": "#10b981",
+  "RESTful APIs": "#0096FF",
+  "n8n": "#FF4B4B",
+  "WebSockets": "#FF9900",
+  "MongoDB": "#47A248",
+  "PostgreSQL": "#4169E1",
+  "MySQL": "#4479A1",
+  "Redis": "#DC382D",
+  "TCP/IP": "#10b981",
+  "HTTP/HTTPS": "#336791",
+  "DNS": "#10b981",
+  "Linux": "#FCC624",
+  "Nginx": "#009639",
+  "Git & GitHub": "#F05032",
+  "AWS (S3, EC2)": "#FF9900",
+  "Vercel": "#10b981",
+  "CI/CD": "#38A169",
+};
 
 export default function Skills() {
   const { skills } = portfolioData;
+  const categories = ["All", ...skills.map(s => s.category)];
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  const languages = skills.find(s => s.category === "Languages")?.skills || [];
-  const frameworks = skills.find(s => s.category === "Frameworks & Web")?.skills || [];
-  const databases = skills.find(s => s.category === "Databases")?.skills || [];
-  const tools = skills.find(s => s.category === "Tools & Cloud")?.skills || [];
+  const filteredSkills = activeCategory === "All"
+    ? skills.flatMap(s => s.skills)
+    : skills.find(s => s.category === activeCategory)?.skills || [];
 
   return (
     <section id="skills" className="scroll-mt-nav py-24 px-6">
       <div className="max-w-6xl mx-auto">
 
-        {/* Section header */}
-        <div className="flex items-center gap-4 mb-16">
+        {/* Section header (Left Aligned as requested) */}
+        <div className="flex flex-col items-start gap-4 mb-10">
           <div>
             <p className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest mb-1">
               03 / What I use
             </p>
             <h2 className="font-[var(--font-cormorant)] text-5xl font-semibold text-zinc-900 dark:text-zinc-50">
-              Skills
+              Technologies I Work With
             </h2>
           </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-emerald-200 to-transparent ml-4 hidden md:block" />
+          <p className="text-zinc-400 font-[var(--font-dm-sans)] max-w-2xl">
+            Specialized in backend development, systems architecture, and modern web frameworks.
+          </p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Filters */}
+        <div className="flex flex-wrap items-center justify-start gap-3 mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-full text-xs font-[var(--font-dm-mono)] transition-all ${activeCategory === cat
+                ? "bg-emerald-500 text-black shadow-[0_0_15px_rgba(16,185,129,0.4)] border border-emerald-400"
+                : "bg-transparent border border-zinc-800 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+                }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-          {/* Frameworks - Top Wide (col-span-2) */}
-          <div className="md:col-span-2 relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 p-8 shadow-sm group flex flex-col justify-center">
-            {/* Background glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3 pointer-events-none transition-transform duration-500 group-hover:scale-110" />
+        {/* Skills Grid */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
+          {filteredSkills.map((skill) => {
+            const skillColor = skillColors[skill] || "#10b981";
 
-            <h3 className="text-xs font-[var(--font-dm-mono)] text-zinc-400 uppercase tracking-widest mb-8 relative z-10 flex items-center gap-2">
-              <span className="h-1 w-4 rounded-full bg-emerald-400" />
-              Frameworks & Web
-            </h3>
+            return (
+              <div
+                key={skill}
+                className="group relative flex flex-col items-center justify-center gap-1.5 p-2 rounded-2xl bg-[#0a0a0a] border border-[#1a1a1a] transition-all duration-300 cursor-default overflow-hidden hover:bg-white/5 hover:border-[var(--skill-color)] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] w-[120px] sm:w-[140px] h-[70px] sm:h-[75px]"
+                style={{ "--skill-color": skillColor } as React.CSSProperties}
+              >
+                {/* Tile Glow Effect */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "linear-gradient(90deg, transparent, var(--skill-color), transparent)" }}
+                />
 
-            {/* Endless Marquee */}
-            <div className="relative flex overflow-hidden w-full fade-edges py-2">
-              <div className="flex w-max animate-marquee gap-6 pr-6 hover:[animation-play-state:paused]">
-                {/* Duplicate list twice for perfect infinite loop */}
-                {[...frameworks, ...frameworks].map((skill, i) => (
-                  <div key={i} className="flex items-center gap-3 px-5 py-3 bg-zinc-50 dark:bg-zinc-950/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 hover:border-emerald-200 hover:shadow-md hover:-translate-y-1 transition-all cursor-default group/skill">
-                    {skillIcons[skill] && (
-                      <img src={skillIcons[skill]} alt={skill} className="w-7 h-7 object-contain grayscale opacity-60 group-hover/skill:grayscale-0 group-hover/skill:opacity-100 transition-all duration-300" />
-                    )}
-                    <span className="font-semibold text-zinc-700 dark:text-zinc-300 text-sm">{skill}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Languages - Top Right (col-span-1) */}
-          <div className="md:col-span-1 min-h-[300px] relative overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800 p-8 shadow-lg group">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-            <h3 className="text-xs font-[var(--font-dm-mono)] text-zinc-400 uppercase tracking-widest mb-8 relative z-10 flex items-center gap-2">
-              <span className="h-1 w-4 rounded-full bg-pink-500" />
-              Languages
-            </h3>
-
-            <div className="absolute inset-0 top-16">
-              {languages.map((skill, i) => {
-                const pos = floatPositions[i % floatPositions.length];
-                return (
-                  <div
-                    key={skill}
-                    className="absolute p-3 rounded-2xl bg-white dark:bg-zinc-900/5 backdrop-blur-md border border-white/10 hover:bg-white dark:bg-zinc-900/10 hover:scale-110 hover:z-20 transition-all cursor-default shadow-xl group/orb"
-                    style={{
-                      top: pos.top,
-                      left: pos.left,
-                      animation: `float-slow ${6 + (i % 4)}s ease-in-out infinite`,
-                      animationDelay: `${i * 0.5}s`
-                    }}
-                  >
-                    {skillIcons[skill] ? (
-                      <img src={skillIcons[skill]} alt={skill} className="w-8 h-8 object-contain drop-shadow-md grayscale opacity-50 group-hover/orb:grayscale-0 group-hover/orb:opacity-100 transition-all duration-300" title={skill} />
-                    ) : (
-                      <span className="text-white text-xs">{skill}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Databases - Bottom Left (col-span-1) */}
-          <div className="md:col-span-1 relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 p-8 shadow-sm group">
-            <div className="absolute inset-0 dot-grid opacity-50" />
-            <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-emerald-100 rounded-full blur-3xl opacity-50 pointer-events-none transition-transform duration-500 group-hover:scale-125" />
-
-            <h3 className="text-xs font-[var(--font-dm-mono)] text-zinc-400 uppercase tracking-widest mb-8 relative z-10 flex items-center gap-2">
-              <span className="h-1 w-4 rounded-full bg-emerald-400" />
-              Databases
-            </h3>
-
-            <div className="grid grid-cols-2 gap-4 relative z-10">
-              {databases.map((skill) => (
-                <div key={skill} className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-emerald-300 hover:shadow-lg hover:-translate-y-1 transition-all group/db cursor-default">
-                  {skillIcons[skill] && (
-                    <img src={skillIcons[skill]} alt={skill} className="w-8 h-8 object-contain mb-3 grayscale opacity-60 group-hover/db:grayscale-0 group-hover/db:opacity-100 transition-all duration-300" />
+                <div className="text-xl flex items-center justify-center transition-all duration-300 drop-shadow-[0_0_3px_rgba(255,255,255,0.1)] group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_var(--skill-color)]">
+                  {skillIcons[skill] ? (
+                    <img
+                      src={skillIcons[skill]}
+                      alt={skill}
+                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_8px_var(--skill-color)]"
+                    />
+                  ) : (
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-zinc-800 flex items-center justify-center transition-all duration-300">
+                      <span className="text-[10px] text-white">{skill[0]}</span>
+                    </div>
                   )}
-                  <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">{skill}</span>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Tools & Cloud - Bottom Wide (col-span-2) */}
-          <div className="md:col-span-2 relative overflow-hidden rounded-3xl bg-[#0d1117] border border-zinc-800 p-8 shadow-xl flex flex-col justify-center font-[var(--font-dm-mono)]">
-
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-8">
-              <div className="w-3 h-3 rounded-full bg-emerald-500" />
-              <div className="w-3 h-3 rounded-full bg-amber-500" />
-              <div className="w-3 h-3 rounded-full bg-emerald-500" />
-              <span className="ml-4 text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Tools & Cloud</span>
-            </div>
-
-            <div className="flex flex-wrap gap-x-8 gap-y-6">
-              {tools.map((skill, i) => (
-                <div key={skill} className="flex items-center gap-3 group/term cursor-default">
-                  <span className="text-emerald-400">~</span>
-                  {skillIcons[skill] && (
-                    <img src={skillIcons[skill]} alt={skill} className="w-6 h-6 object-contain grayscale opacity-50 group-hover/term:grayscale-0 group-hover/term:opacity-100 transition-all duration-300" />
-                  )}
-                  <span className="text-zinc-400 text-sm group-hover/term:text-white transition-colors">{skill}</span>
-                </div>
-              ))}
-              <div className="flex items-center gap-2 animate-pulse">
-                <span className="text-emerald-400">~</span>
-                <div className="w-2.5 h-5 bg-zinc-400" />
+                <span className="text-[10px] sm:text-xs font-medium text-zinc-400 group-hover:text-white transition-colors duration-300 relative z-10 text-center leading-tight px-1">
+                  {skill}
+                </span>
               </div>
-            </div>
-
-          </div>
+            );
+          })}
         </div>
 
       </div>

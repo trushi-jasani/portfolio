@@ -114,34 +114,28 @@ export const portfolioData: PortfolioConfig = {
   skills: [
     {
       category: "Languages",
-      skills: ["TypeScript", "JavaScript", "Python", "Java", "C++", "SQL"],
+      skills: ["C++", "Java", "JavaScript", "TypeScript", "Python", "SQL"]
     },
     {
-      category: "Frameworks & Web",
-      skills: [
-        "Next.js",
-        "React",
-        "Node.js",
-        "Express.js",
-        "Tailwind CSS",
-        "REST APIs",
-      ],
+      category: "Frontend",
+      skills: ["HTML5", "CSS3", "React", "Next.js", "Tailwind CSS"]
+    },
+    {
+      category: "Backend",
+      skills: ["Node.js", "Express.js", "RESTful APIs", "n8n", "WebSockets"]
     },
     {
       category: "Databases",
-      skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Prisma ORM"],
+      skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis"]
+    },
+    {
+      category: "Networking & Systems",
+      skills: ["TCP/IP", "HTTP/HTTPS", "DNS", "Linux", "Nginx"]
     },
     {
       category: "Tools & Cloud",
-      skills: [
-        "Git & GitHub",
-        "Docker",
-        "Vercel",
-        "AWS (S3, EC2)",
-        "Linux",
-        "Postman",
-      ],
-    },
+      skills: ["Git & GitHub", "AWS (S3, EC2)", "Vercel", "CI/CD"]
+    }
   ],
 
   projects: [
@@ -172,16 +166,16 @@ export const portfolioData: PortfolioConfig = {
         "Axios",
         "Nodemailer",
       ],
-      thumbnailPath: "/assets/projects/ScholarAI.png",
+      thumbnailPath: "/assets/project-thumbnails/ScholarAI.png",
       githubUrl: "https://github.com/trushij/devboard",
       liveUrl: "https://devboard-demo.vercel.app",
       featured: true,
       year: "2024",
     },
     {
-      id: "noteflow",
+      id: "AuraNotes",
 
-      title: "NoteFlow — MERN Notes Management Platform",
+      title: "AuraNotes — MERN Notes Management Platform",
 
       shortDesc:
         "A full-stack MERN notes application featuring a modern glassmorphism UI, secure REST APIs, rate limiting, and real-time responsive user experience.",
@@ -210,7 +204,7 @@ export const portfolioData: PortfolioConfig = {
         "REST API",
         "JWT",
       ],
-      thumbnailPath: "/assets/projects/autorain.png",
+      thumbnailPath: "/assets/project-thumbnails/note.png",
       githubUrl: "https://github.com/trushij/autorain",
       liveUrl: "",
       featured: true,
@@ -242,7 +236,7 @@ export const portfolioData: PortfolioConfig = {
         "OOP",
         "PNG Image Processing",
       ],
-      thumbnailPath: "/assets/projects/algodocs.png",
+      thumbnailPath: "/assets/project-thumbnails/paintapp.png",
       githubUrl: "https://github.com/TheAlgorithms/Algo/issues/2359",
       liveUrl: "",
       featured: true,
