@@ -230,6 +230,27 @@ function ProjectCard({
           )}
         </div>
       </div>
+      <div className="flex items-center gap-4 mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-xs font-[var(--font-dm-mono)]"
+        >
+          GitHub →
+        </a>
+
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-xs font-[var(--font-dm-mono)]"
+        >
+          Live Demo →
+        </a>
+      </div>
     </button>
   );
 }

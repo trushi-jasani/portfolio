@@ -21,7 +21,7 @@ const skillIcons: Record<string, string> = {
   "MySQL": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
   "Redis": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
   "Linux": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-  "Nginx": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg",
+
   "Git & GitHub": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
   "AWS (S3, EC2)": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
   "Vercel": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
@@ -43,20 +43,20 @@ const skillColors: Record<string, string> = {
   "Express.js": "#10b981",
   "RESTful APIs": "#0096FF",
   "n8n": "#FF4B4B",
-  "WebSockets": "#FF9900",
+
   "MongoDB": "#47A248",
   "PostgreSQL": "#4169E1",
   "MySQL": "#4479A1",
   "Redis": "#DC382D",
   "TCP/IP": "#10b981",
-  "HTTP/HTTPS": "#336791",
-  "DNS": "#10b981",
+
+
   "Linux": "#FCC624",
-  "Nginx": "#009639",
+
   "Git & GitHub": "#F05032",
   "AWS (S3, EC2)": "#FF9900",
   "Vercel": "#10b981",
-  "CI/CD": "#38A169",
+
 };
 
 export default function Skills() {

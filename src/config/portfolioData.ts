@@ -122,7 +122,7 @@ export const portfolioData: PortfolioConfig = {
     },
     {
       category: "Backend",
-      skills: ["Node.js", "Express.js", "RESTful APIs", "n8n", "WebSockets"]
+      skills: ["Node.js", "Express.js", "RESTful APIs", "n8n"]
     },
     {
       category: "Databases",
@@ -130,11 +130,11 @@ export const portfolioData: PortfolioConfig = {
     },
     {
       category: "Networking & Systems",
-      skills: ["TCP/IP", "HTTP/HTTPS", "DNS", "Linux", "Nginx"]
+      skills: ["TCP/IP", "Linux"]
     },
     {
       category: "Tools & Cloud",
-      skills: ["Git & GitHub", "AWS (S3, EC2)", "Vercel", "CI/CD"]
+      skills: ["Git & GitHub", "AWS (S3, EC2)", "Vercel",]
     }
   ],
 
@@ -167,10 +167,10 @@ export const portfolioData: PortfolioConfig = {
         "Nodemailer",
       ],
       thumbnailPath: "/assets/project-thumbnails/ScholarAI.png",
-      githubUrl: "https://github.com/trushij/devboard",
+      githubUrl: "https://github.com/trushi-jasani/ScholarAI",
       liveUrl: "https://devboard-demo.vercel.app",
       featured: true,
-      year: "2024",
+      year: "2026",
     },
     {
       id: "AuraNotes",
@@ -205,10 +205,10 @@ export const portfolioData: PortfolioConfig = {
         "JWT",
       ],
       thumbnailPath: "/assets/project-thumbnails/note.png",
-      githubUrl: "https://github.com/trushij/autorain",
-      liveUrl: "",
+      githubUrl: "https://github.com/trushi-jasani/AuraNotes",
+      liveUrl: "https://notes-board-sqsh.onrender.com/",
       featured: true,
-      year: "2024",
+      year: "2026",
     },
     {
       id: "paintapp",
@@ -240,7 +240,7 @@ export const portfolioData: PortfolioConfig = {
       githubUrl: "https://github.com/TheAlgorithms/Algo/issues/2359",
       liveUrl: "",
       featured: true,
-      year: "2024",
+      year: "2025",
     },
     {
       id: "smartraindetector",
@@ -269,8 +269,8 @@ export const portfolioData: PortfolioConfig = {
         "Electronics Prototyping",
         "Automation Systems",
       ],
-      thumbnailPath: "/assets/projects/dsa-roadmap.png",
-      githubUrl: "https://github.com/trushij/dsa-roadmap",
+      thumbnailPath: "/assets/project-thumbnails/rain.png",
+      githubUrl: "https://github.com/trushij/rain",
       liveUrl: "https://dsa-roadmap.vercel.app",
       featured: false,
       year: "2025",
