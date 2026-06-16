@@ -11,7 +11,7 @@ export default function Contact() {
         <div className="flex items-center gap-4 mb-16">
           <div>
             <p className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest mb-1">
-              05 / Let&apos;s build
+              06 / Let&apos;s build
             </p>
             <h2 className="font-[var(--font-cormorant)] text-5xl font-semibold text-zinc-900 dark:text-zinc-50">
               Reach Out

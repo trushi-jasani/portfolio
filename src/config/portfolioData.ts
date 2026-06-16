@@ -75,14 +75,14 @@ export const portfolioData: PortfolioConfig = {
   personalDetails: {
     name: "Trushi Jasani",
     initials: "",
-    subtitle: "IT Engineering Student",
+    subtitle: " IT Engineering Student",
     headerSummary:
       "Third-year IT student in Nadiad , Gujarat · Building scalable systems, contributing to open source, and exploring the intersection of algorithms and elegant design.",
     links: {
       github: "https://github.com/trushi-jasani",
-      linkedin: "https://linkedin.com/in/trushij",
-      email: "jasanitrushi@example.com",
-      discord: "https://discord.com/users/#",
+      linkedin: "https://www.linkedin.com/in/trushi-jasani-672396360/",
+      email: "jasanitrushi@gmail.com",
+      discord: "https://discord.com/users/trushi_jasani_30807",
       resumePdf: "/assets/resume.pdf",
     },
   },
@@ -295,6 +295,15 @@ export const portfolioData: PortfolioConfig = {
       date: "2025",
       credentialUrl: "",
       image: "/assets/certificates/gdg.png",
+      status: "Participation",
+    },
+      {
+      id: "SSIP",
+      title: "IIC & SSIP cell DDU",
+      issuer: "SSIP",
+      date: "2025",
+      credentialUrl: "",
+      image: "/assets/certificates/ssip.png",
       status: "Participation",
     },
 

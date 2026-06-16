@@ -25,6 +25,11 @@ export default function Hero() {
               <span className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest">
                 {subtitle}
               </span>
+              <span className="h-1 w-1 rounded-full bg-emerald-400" />
+
+  <span className="px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-medium">
+    CPI : 9.78 / 10
+  </span>
             </div>
 
             {/* Name */}
@@ -107,23 +112,37 @@ export default function Hero() {
 
             {/* CTA buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
+              {/* <a
                 href={links.resumePdf}
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-white text-sm font-medium hover:bg-emerald-600 transition-all shadow-md hover:shadow-emerald-200"
               >
                 <FileBadge size={16} />
                 Resume
-              </a>
+              </a> */}
               <a
-                href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-zinc-200 dark:border-zinc-800/80 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-emerald-300 hover:text-emerald-600 transition-all"
-              >
-                View Work
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </a>
+  href="#projects"
+  className="
+    inline-flex items-center gap-2 px-6 py-3 rounded-full
+    border border-zinc-200 dark:border-zinc-800/80
+    text-zinc-700 dark:text-zinc-300
+    text-sm font-medium
+    hover:border-emerald-300
+    hover:text-emerald-600
+    hover:-translate-y-1
+    hover:shadow-lg hover:shadow-emerald-500/10
+    transition-all duration-300
+  "
+>
+  View Work
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+    <path
+      fillRule="evenodd"
+      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+      clipRule="evenodd"
+    />
+  </svg>
+</a>
             </div>
           </div>
 

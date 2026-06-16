@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { portfolioData } from "@/config/portfolioData";
-
+import { FileBadge } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -54,25 +54,29 @@ export default function Nav() {
       >
 
         <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center">
-
-          <div
-            className="
-    h-8 px-3
+        <a
+  href={portfolioData.personalDetails.links.resumePdf}
+  download
+  className="
+    h-9 px-5
     rounded-full
-    border border-emerald-500/30
-    bg-emerald-500/10
-    flex items-center justify-center
-    text-emerald-400
+    border border-emerald-400
+    bg-gradient-to-r from-emerald-500/20 to-emerald-400/20
+    flex items-center gap-1
+    text-emerald-200
     font-[var(--font-cormorant)]
-    text-sm font-semibold
+    text-base font-semibold
     tracking-wider
-    hover:border-emerald-400
-    hover:bg-emerald-500/20
+    shadow-lg shadow-emerald-500/30
+    ring-1 ring-emerald-400/30
+    hover:scale-105
+    hover:shadow-emerald-500/50
     transition-all duration-300
   "
-          >
-            TRUSHI..
-          </div>
+>
+  <FileBadge size={14} />
+  Resume
+</a>
           {/* Logo / initials */}
           <Link
             href="/"

@@ -15,7 +15,7 @@ export default function Certifications() {
         <div className="flex items-center gap-4 mb-16">
           <div>
             <p className="text-xs font-[var(--font-dm-mono)] text-emerald-500 uppercase tracking-widest mb-1">
-              03 / Learning Journey
+              04 / Learning Journey
             </p>
 
             <h2 className="font-[var(--font-cormorant)] text-5xl font-semibold text-zinc-900 dark:text-zinc-50">
