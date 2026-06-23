@@ -5,6 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { portfolioData } from "@/config/portfolioData";
 
+interface MasonryItem {
+  src: string;
+  originalIndex: number;
+}
+
 export default function CreativePage() {
   const { drawings } = portfolioData;
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -31,10 +36,10 @@ export default function CreativePage() {
     return () => { document.body.style.overflow = ""; };
   }, [lightboxIndex]);
 
-  // Distribute drawings across 3 columns for masonry
-  const columns: string[][] = [[], [], []];
+  // Distribute drawings with their true indexes across 3 columns for safe masonry mapping
+  const columns: MasonryItem[][] = [[], [], []];
   drawings.forEach((src, i) => {
-    columns[i % 3].push(src);
+    columns[i % 3].push({ src, originalIndex: i });
   });
 
   return (
@@ -72,37 +77,39 @@ export default function CreativePage() {
             </p>
           </div>
 
-          {/* Masonry grid */}
+          {/* Masonry grid with Next.js Optimized Image Handling */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {columns.map((col, colIdx) => (
               <div key={colIdx} className="flex flex-col gap-4">
-                {col.map((src, rowIdx) => {
-                  const globalIdx = colIdx + rowIdx * 3;
-                  return (
-                    <button
-                      key={src}
-                      onClick={() => setLightboxIndex(globalIdx)}
-                      className="group relative overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0a0a0a] shadow-sm hover:border-[#333] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 w-full"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={src}
-                        alt={`Drawing ${globalIdx + 1}`}
-                        loading="lazy"
-                        className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                {col.map((item) => (
+                  <button
+                    key={item.src}
+                    onClick={() => setLightboxIndex(item.originalIndex)}
+                    className="group relative overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0a0a0a] shadow-sm hover:border-[#333] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 w-full"
+                  >
+                    <div className="relative w-full before:content-[''] before:block before:pb-[133%]">
+                      <Image
+                        src={item.src}
+                        alt={`Drawing ${item.originalIndex + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                       />
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-200 flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-[#0a0a0a]/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-sm border border-[#333]">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M5 8a1 1 0 011-1h1V6a1 1 0 012 0v1h1a1 1 0 110 2H9v1a1 1 0 11-2 0V9H6a1 1 0 01-1-1z" />
-                            <path fillRule="evenodd" d="M2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8zm6-4a4 4 0 100 8 4 4 0 000-8z" clipRule="evenodd" />
-                          </svg>
-                        </div>
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-200 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-[#0a0a0a]/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-sm border border-[#333]">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M5 8a1 1 0 011-1h1V6a1 1 0 012 0v1h1a1 1 0 110 2H9v1a1 1 0 11-2 0V9H6a1 1 0 01-1-1z" />
+                          <path fillRule="evenodd" d="M2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8zm6-4a4 4 0 100 8 4 4 0 000-8z" clipRule="evenodd" />
+                        </svg>
                       </div>
-                    </button>
-                  );
-                })}
+                    </div>
+                  </button>
+                ))}
               </div>
             ))}
           </div>
@@ -136,13 +143,14 @@ export default function CreativePage() {
           </button>
 
           {/* Image */}
-          <div className="relative w-full max-w-3xl max-h-[85vh] mx-16">
+          <div className="relative w-full max-w-3xl h-[85vh] mx-16">
             <Image
               src={drawings[lightboxIndex]}
               alt={`Drawing ${lightboxIndex + 1}`}
-              width={900}
-              height={1200}
-              className="object-contain w-full h-full max-h-[85vh] rounded-lg shadow-2xl"
+              fill
+              priority
+              className="object-contain rounded-lg shadow-2xl"
+              sizes="(max-w-width: 1200px) 100vw"
             />
           </div>
 

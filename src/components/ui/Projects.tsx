@@ -182,9 +182,19 @@ function ProjectCard({
   onClick: () => void;
 }) {
   return (
-    <button
+    <div
       onClick={onClick}
-      className="group text-left w-full rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm overflow-hidden card-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+      onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${project.title}`}
+      className="group cursor-pointer text-left w-full rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm overflow-hidden card-lift focus-within:ring-2 focus-within:ring-emerald-400 outline-none flex flex-col h-full focus-within:-translate-y-1 focus-within:shadow-[0_20px_40px_-12px_rgba(16,185,129,0.12)]"
     >
       {/* Thumbnail area */}
       <div className="relative h-52 overflow-hidden">
@@ -196,7 +206,7 @@ function ProjectCard({
 
         <div className="absolute inset-0 bg-black/30" />
 
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300">
           <span className="bg-black/70 backdrop-blur-sm text-white rounded-full px-4 py-2 text-xs">
             View Details →
           </span>
@@ -208,7 +218,7 @@ function ProjectCard({
       </div>
 
       {/* Content */}
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-grow">
         <h3 className="font-[var(--font-cormorant)] text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-1.5 leading-snug">
           {project.title}
         </h3>
@@ -217,7 +227,7 @@ function ProjectCard({
         </p>
 
         {/* Tools */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 mb-5">
           {project.toolsUsed.slice(0, 4).map((tool) => (
             <span key={tool} className="skill-badge text-[10px]">
               {tool}
@@ -229,29 +239,69 @@ function ProjectCard({
             </span>
           )}
         </div>
-      </div>
-      <div className="flex items-center gap-4 mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-xs font-[var(--font-dm-mono)]"
-        >
-          GitHub →
-        </a>
 
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-xs font-[var(--font-dm-mono)]"
-        >
-          Live Demo →
-        </a>
+        {/* Actions Grid */}
+        <div className="grid grid-cols-2 gap-3 mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="group/github-btn inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold font-[var(--font-dm-mono)] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 hover:bg-zinc-100 dark:bg-zinc-900/40 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="currentColor" 
+              className="h-3.5 w-3.5 transition-transform duration-200 group-hover/github-btn:scale-110"
+            >
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 19.57 3.633 19.2 3.633 19.2c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.107-.776.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            GitHub
+          </a>
+
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="group/demo-btn inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold font-[var(--font-dm-mono)] rounded-xl bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                strokeWidth={2.5} 
+                stroke="currentColor" 
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover/demo-btn:translate-x-0.5 group-hover/demo-btn:-translate-y-0.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+              Live Demo
+            </a>
+          ) : (
+            <button
+              disabled
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold font-[var(--font-dm-mono)] rounded-xl bg-zinc-100 dark:bg-zinc-800/40 text-zinc-400 dark:text-zinc-600 border border-transparent cursor-not-allowed transition-all duration-200"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                strokeWidth={2.5} 
+                stroke="currentColor" 
+                className="h-3.5 w-3.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+              </svg>
+              Live Demo
+            </button>
+          )}
+        </div>
       </div>
-    </button>
+    </div>
   );
 }
 

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { portfolioData } from "@/config/portfolioData";
-import { FileBadge } from "lucide-react";
+import { FileBadge, Mail, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -18,7 +19,10 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
+  // Choose trigger button hover animation style: "combined", "layout-lift", or "ring-expansion"
+  const HOVER_EFFECT_STYLE = "combined" as string;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -106,96 +110,121 @@ export default function Nav() {
           <div
             className="relative hidden md:block ml-8 md:ml-auto"
             onClick={(e) => e.stopPropagation()}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
+            {/* Sleek ring expansion animation using Framer Motion */}
+            <AnimatePresence>
+              {isHovered && (HOVER_EFFECT_STYLE === "ring-expansion" || HOVER_EFFECT_STYLE === "combined") && (
+                <motion.span
+                  initial={{ scale: 0.95, opacity: 0.8 }}
+                  animate={{ scale: 1.25, opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: "easeOut" }}
+                  className="absolute inset-0 rounded-xl border border-emerald-500/80 dark:border-emerald-400/80 pointer-events-none"
+                />
+              )}
+            </AnimatePresence>
+
             <button
               onClick={() => setContactOpen(!contactOpen)}
-              className="
-      px-4 py-2
-      rounded-xl
-      border border-zinc-200
-      bg-white/80 dark:bg-zinc-900/80
-      backdrop-blur-sm
-      text-sm font-medium
-      text-zinc-700 dark:text-zinc-300
-      hover:border-zinc-400 dark:hover:border-zinc-600
-      hover:text-zinc-900 dark:hover:text-zinc-100
-      transition-all
-    "
+              className={`
+                relative px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 outline-none transition-all duration-300 group
+                ${contactOpen
+                  ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-400/10 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]"
+                  : "border-emerald-500/30 dark:border-emerald-400/20 bg-emerald-500/5 dark:bg-emerald-400/5 text-emerald-600 dark:text-emerald-400 shadow-[0_0_12px_-3px_rgba(16,185,129,0.15)] hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300"
+                }
+                ${(HOVER_EFFECT_STYLE === "layout-lift" || HOVER_EFFECT_STYLE === "combined")
+                  ? "hover:scale-[1.03] hover:backdrop-blur-md"
+                  : ""
+                }
+              `}
             >
-              Reach Out
+              <span>Reach Out</span>
+              <ChevronDown 
+                size={14} 
+                className={`transition-transform duration-300 ${contactOpen ? "rotate-180" : ""}`}
+              />
             </button>
 
-            {contactOpen && (
-              <div
-                className="
-        absolute right-0 top-12
-        w-56
-        rounded-2xl
-        border border-zinc-200 dark:border-zinc-800
-        bg-white dark:bg-zinc-900
-        shadow-xl
-        overflow-hidden
-        animate-fade-in
-      "
-              >
-                {/* Email */}
-                <a
-                  href={`mailto:${portfolioData.personalDetails.links.email}`}
-                  className="flex items-center gap-3 px-4 py-3 group hover:bg-zinc-50 transition-colors"
+            <AnimatePresence>
+              {contactOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="absolute right-0 top-14 w-60 rounded-2xl border border-zinc-800 bg-zinc-950/95 backdrop-blur-md shadow-2xl overflow-hidden flex flex-col z-50"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-5 w-5 text-zinc-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:text-[#ea4335] transition-all duration-300"
+                  {/* Email */}
+                  <a
+                    href={`mailto:${portfolioData.personalDetails.links.email}`}
+                    onClick={() => setContactOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3.5 hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition-colors duration-200 group/item"
                   >
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
+                    <Mail size={16} className="text-zinc-400 group-hover/item:text-[#ea4335] group-hover/item:scale-105 transition-all duration-200" />
+                    <span className="text-sm font-medium font-[var(--font-dm-sans)]">Email</span>
+                  </a>
 
-                  <span className="text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors duration-300">Email</span>
-                </a>
+                  <div className="h-px bg-zinc-800 w-full" />
 
-                {/* LinkedIn */}
-                <a
-                  href={portfolioData.personalDetails.links.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 border-t border-zinc-100 group hover:bg-zinc-50 transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-5 w-5 text-zinc-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:text-[#0a66c2] transition-all duration-300"
+                  {/* LinkedIn */}
+                  <a
+                    href={portfolioData.personalDetails.links.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setContactOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3.5 hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition-colors duration-200 group/item"
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.128 0 2.062 2.062 0 01-2.065 2.065zM7.119 20.452H3.555V9h3.564v11.452z" />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-400 group-hover/item:text-[#0a66c2] group-hover/item:scale-105 transition-all duration-200"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect width="4" height="12" x="2" y="9" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span className="text-sm font-medium font-[var(--font-dm-sans)]">LinkedIn</span>
+                  </a>
 
-                  <span className="text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors duration-300">LinkedIn</span>
-                </a>
+                  <div className="h-px bg-zinc-800 w-full" />
 
-                {/* GitHub */}
-                <a
-                  href={portfolioData.personalDetails.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 border-t border-zinc-100 group hover:bg-zinc-50 transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-5 w-5 text-zinc-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:text-[#181717] transition-all duration-300"
+                  {/* GitHub */}
+                  <a
+                    href={portfolioData.personalDetails.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setContactOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3.5 hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition-colors duration-200 group/item"
                   >
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.932 0-1.31.465-2.382 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.645 1.653.24 2.873.118 3.176.77.838 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-
-                  <span className="text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors duration-300">GitHub</span>
-                </a>
-              </div>
-            )}
-
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-400 group-hover/item:text-white group-hover/item:scale-105 transition-all duration-200"
+                    >
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                      <path d="M9 18c-4.51 2-5-2-7-2" />
+                    </svg>
+                    <span className="text-sm font-medium font-[var(--font-dm-sans)]">GitHub</span>
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
           {/* Hamburger */}
           <button
