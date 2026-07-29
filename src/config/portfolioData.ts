@@ -279,6 +279,15 @@ export const portfolioData: PortfolioConfig = {
 
   ],
   certifications: [
+     {
+      id: "hacthon",
+      title: "Women Who Master - Hackthon",
+      issuer: "UNSTOP",
+      date: "2026",
+      credentialUrl: "",
+      image: "/assets/certificates/women-who-master.png",
+      status: "Participation",
+    },
     {
       id: "ccna",
       title: "CCNA: Introduction to Networks",
@@ -315,7 +324,7 @@ export const portfolioData: PortfolioConfig = {
       credentialUrl: "",
       image: "/assets/certificates/duhacks.png",
       status: "Participation",
-    },
+    }, 
   ],
   drawings: [
 
