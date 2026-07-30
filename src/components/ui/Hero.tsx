@@ -159,7 +159,7 @@ export default function Hero() {
               {/* Photo frame */}
               <div className="relative w-80 h-[420px] rounded-2xl overflow-hidden bg-zinc-50 border border-[#1a1a1a] shadow-xl">
                 <Image
-                  src="/images/photo.png"
+                  src="/images/photo.jpeg"
                   alt="Trushi J"
                   fill
                   priority
