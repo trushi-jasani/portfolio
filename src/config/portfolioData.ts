@@ -288,6 +288,15 @@ export const portfolioData: PortfolioConfig = {
       image: "/assets/certificates/women-who-master.png",
       status: "Participation",
     },
+     {
+      id: "AWS",
+      title: "AWS Academy Graduate - Cloud Foundations",
+      issuer: "AWS Academy",
+      date: "2026",
+      credentialUrl: "",
+      image: "/assets/certificates/aws.png",
+      status: "Completed",
+    }, 
     {
       id: "ccna",
       title: "CCNA: Introduction to Networks",
@@ -325,6 +334,7 @@ export const portfolioData: PortfolioConfig = {
       image: "/assets/certificates/duhacks.png",
       status: "Participation",
     }, 
+   
   ],
   drawings: [
 
