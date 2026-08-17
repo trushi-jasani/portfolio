@@ -218,56 +218,78 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {/* LeetCode Bento Card */}
-            <a
-              href="https://leetcode.com/u/trushi_jasani/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-[2rem] border border-zinc-900 bg-[#050505] p-6 hover:border-yellow-500/40 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex justify-between items-center mb-8">
-                  <div className="flex items-center gap-2.5">
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" fill="none">
-                      <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.823-.662l-4.17-4.131c-.51-.505-.731-1.165-.731-1.826s.22-1.32.73-1.826l4.17-4.13ic.466-.467 1.11-.663 1.823-.663s1.357.196 1.823.662l2.697 2.607c.26.26.56.39.86.39.303 0 .6-.13.862-.39.463-.462.463-1.211 0-1.674l-2.697-2.607c-.966-.966-2.242-1.438-3.545-1.438s-2.58.47-3.545 1.438l-4.17 4.131c-.966.965-1.437 2.246-1.437 3.533 0 1.287.47 2.569 1.437 3.535l4.17 4.13c.966.967 2.242 1.44 3.545 1.44s2.58-.473 3.545-1.44l2.697-2.606c.463-.463.463-1.212 0-1.675-.26-.26-.56-.39-.862-.39-.3 0-.6.13-.86.39z" fill="#FFA116" />
-                      <path d="M13.625 11.975H8.375c-.621 0-1.125.504-1.125 1.125s.504 1.125 1.125 1.125h5.25c.621 0 1.125-.504 1.125-1.125s-.504-1.125-1.125-1.125z" fill="#B3B3B3" />
-                      <path d="M16.825 9.175c.463-.462.463-1.211 0-1.674-.26-.26-.56-.39-.862-.39-.3 0-.6.13-.86.39L12.406 10.2c-.463.463-.463 1.212 0 1.675.26.26.56.39.862.39.3 0 .6-.13.86-.39l2.697-2.7z" fill="#FFA116" />
-                    </svg>
-                    <h3 className="text-xl font-semibold text-white">LeetCode</h3>
-                  </div>
-                  <span className="text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                </div>
+            {/* LeetCode Bento Card with Integrated Dynamic Heatmap */}
+<a
+  href="https://leetcode.com/u/trushi_jasani/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group rounded-[2rem] border border-zinc-900 bg-[#050505] p-6 hover:border-yellow-500/40 transition-all flex flex-col justify-between"
+>
+  <div>
+    <div className="flex justify-between items-center mb-6">
+      <div className="flex items-center gap-2.5">
+        <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" fill="none">
+          <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.823-.662l-4.17-4.131c-.51-.505-.731-1.165-.731-1.826s.22-1.32.73-1.826l4.17-4.13ic.466-.467 1.11-.663 1.823-.663s1.357.196 1.823.662l2.697 2.607c.26.26.56.39.86.39.303 0 .6-.13.862-.39.463-.462.463-1.211 0-1.674l-2.697-2.607c-.966-.966-2.242-1.438-3.545-1.438s-2.58.47-3.545 1.438l-4.17 4.131c-.966.965-1.437 2.246-1.437 3.533 0 1.287.47 2.569 1.437 3.535l4.17 4.13c.966.967 2.242 1.44 3.545 1.44s2.58-.473 3.545-1.44l2.697-2.606c.463-.463.463-1.212 0-1.675-.26-.26-.56-.39-.862-.39-.3 0-.6.13-.86.39z" fill="#FFA116" />
+          <path d="M13.625 11.975H8.375c-.621 0-1.125.504-1.125 1.125s.504 1.125 1.125 1.125h5.25c.621 0 1.125-.504 1.125-1.125s-.504-1.125-1.125-1.125z" fill="#B3B3B3" />
+          <path d="M16.825 9.175c.463-.462.463-1.211 0-1.674-.26-.26-.56-.39-.862-.39-.3 0-.6.13-.86.39L12.406 10.2c-.463.463-.463 1.212 0 1.675.26.26.56.39.862.39.3 0-.6.13-.86.39l2.697-2.7z" fill="#FFA116" />
+        </svg>
+        <h3 className="text-xl font-semibold text-white">LeetCode</h3>
+      </div>
+      <span className="text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+    </div>
 
-                <AnimatePresence mode="wait">
-                  {loading ? (
-                    <StatSkeleton key="skeleton" />
-                  ) : (
-                    <motion.div
-                      key="stats"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="grid grid-cols-2 gap-4"
-                    >
-                      <div>
-                        <p className="text-4xl font-bold text-emerald-400">
-                          {leetcodeStats.solved !== null ? `${leetcodeStats.solved}+` : "120+"}
-                        </p>
-                        <p className="text-xs text-zinc-500 uppercase tracking-widest font-[var(--font-dm-mono)] mt-1">Solved</p>
-                      </div>
-                      <div>
-                        <p className="text-4xl font-bold text-emerald-400">
-                          {leetcodeStats.rating !== null ? leetcodeStats.rating : "1550+"}
-                        </p>
-                        <p className="text-xs text-zinc-500 uppercase tracking-widest font-[var(--font-dm-mono)] mt-1">Rating</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              <div className="text-[10px] text-zinc-600 font-[var(--font-dm-mono)] mt-6 pt-4 border-t border-zinc-900/60">
-                Handle: trushi_jasani
-              </div>
-            </a>
+    <AnimatePresence mode="wait">
+      {loading ? (
+        <StatSkeleton key="skeleton" />
+      ) : (
+        <motion.div
+          key="stats"
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          className="space-y-4"
+        >
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-4xl font-bold text-emerald-400">
+                {leetcodeStats.solved !== null ? `${leetcodeStats.solved}+` : "200+"}
+              </p>
+              <p className="text-xs text-zinc-500 uppercase tracking-widest font-[var(--font-dm-mono)] mt-1">Solved</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-emerald-400">
+                {leetcodeStats.rating !== null ? leetcodeStats.rating : "1550+"}
+              </p>
+              <p className="text-xs text-zinc-500 uppercase tracking-widest font-[var(--font-dm-mono)] mt-1">Rating</p>
+            </div>
+          </div>
+
+          {/* Dynamic Heatmap Preview */}
+          {/* Dynamic Heatmap / Activity Preview */}
+<div className="mt-4 pt-4 border-t border-zinc-900/80 overflow-hidden">
+  <p className="text-[10px] text-zinc-500 font-[var(--font-dm-mono)] uppercase tracking-wider mb-2">
+    Submission Heatmap
+  </p>
+  <div className="w-full overflow-x-auto no-scrollbar py-1">
+    <img
+      src="https://leetcode-badge-showcase.vercel.app/api/calendar?username=trushi_jasani&theme=dark"
+      alt="LeetCode Submission Heatmap"
+      className="w-full min-w-[280px] h-auto object-contain rounded filter opacity-90 group-hover:opacity-100 transition-opacity"
+      onError={(e) => {
+        // Fallback API if primary is unavailable
+        e.currentTarget.src = "https://leetcard.jacoblin.cool/trushi_jasani?ext=heatmap&theme=dark";
+      }}
+    />
+  </div>
+</div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+  <div className="text-[10px] text-zinc-600 font-[var(--font-dm-mono)] mt-4 pt-3 border-t border-zinc-900/60">
+    Handle: trushi_jasani
+  </div>
+</a>
 
             {/* CodeChef Bento Card */}
             <a

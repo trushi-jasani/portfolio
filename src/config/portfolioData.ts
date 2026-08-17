@@ -168,10 +168,44 @@ export const portfolioData: PortfolioConfig = {
       ],
       thumbnailPath: "/assets/project-thumbnails/ScholarAI.png",
       githubUrl: "https://github.com/trushi-jasani/ScholarAI",
-      liveUrl: "https://devboard-demo.vercel.app",
+      liveUrl: "https://scholar-ai-tau-three.vercel.app",
       featured: true,
       year: "2026",
-    },
+    },{
+  id: "bhvl",
+  title: "BHVL — AI-Powered Helpline Dispatch System",
+  shortDesc:
+    "A voice-first AI layer for emergency dispatch centers that transcribes regional dialects, performs spoken verification, auto-prioritizes high-distress calls, and logs detailed audit trails.",
+
+  longDesc:
+    "BHVL is a verify-before-you-act voice AI system designed for critical-service dispatch. The platform transcribes multi-dialect spoken audio, uses large language models to extract caller intent and emotional urgency, and closes the verification loop by speaking back a confirmation summary to the caller via text-to-speech before dispatching.",
+
+  problemStatement:
+    "Emergency helplines suffer from dialect barriers, lack of caller verification, and manual triage delays. Traditional systems struggle with regional accents, lack automated confirmation mechanisms to prevent misrouting, and can leave urgent, high-distress calls sitting in generic operator queues.",
+
+  solution:
+    "Engineered a full-stack voice pipeline featuring a FastAPI backend and React dashboard. Integrated Groq's Whisper-large-v3 for accurate speech recognition and Llama 3.3 70B for single-pass extraction of transcript, intent, dialect, emotion, and restated summaries. Implemented gTTS closed-loop spoken verification, automated priority flagging based on distress detection, and full call logging backed by SQLAlchemy.",
+
+  toolsUsed: [
+    "React 19",
+    "Vite",
+    "Framer Motion",
+    "FastAPI",
+    "Python",
+    "Groq API (Whisper v3, Llama 3.3 70B)",
+    "gTTS",
+    "SQLAlchemy",
+    "Pydub",
+    "Axios",
+    "Tailwind CSS",
+    "Firebase",
+  ],
+  thumbnailPath: "/assets/project-thumbnails/bhvl.png",
+  githubUrl: "https://github.com/trushi-jasani/BHVL",
+  liveUrl: "https://bhvl.vercel.app",
+  featured: true,
+  year: "2026",
+},
     {
       id: "AuraNotes",
 
