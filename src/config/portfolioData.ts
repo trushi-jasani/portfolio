@@ -100,7 +100,7 @@ export const portfolioData: PortfolioConfig = {
         id: "metric-profile",
         icon: "📊",
         title: "Metric-Driven Profile",
-        body: "Consistency in algorithmic thinking is something I treat like a discipline. I hold a CodeChef rating of 1350+ and have solved 120+ problems on LeetCode, spanning dynamic programming, graph traversal, and system-design primitives. I contribute actively to open source — including documentation and implementation work on the Algo repository — because writing clear, correct algorithms for others to read is the hardest test of your own understanding.",
+        body: "Consistency in algorithmic thinking is something I treat like a discipline. I hold a CodeChef rating of 1350+ and have solved 250+ problems on LeetCode, spanning dynamic programming, graph traversal, and system-design primitives. I contribute actively to open source — including documentation and implementation work on the Algo repository — because writing clear, correct algorithms for others to read is the hardest test of your own understanding.",
       },
       {
         id: "current-focus",
