@@ -305,7 +305,7 @@ export const portfolioData: PortfolioConfig = {
       ],
       thumbnailPath: "/assets/project-thumbnails/rain.png",
       githubUrl: "https://github.com/trushij/rain",
-      liveUrl: "https://dsa-roadmap.vercel.app",
+      liveUrl: "",
       featured: false,
       year: "2025",
     },
