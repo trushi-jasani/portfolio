@@ -303,10 +303,10 @@ export const portfolioData: PortfolioConfig = {
         "Electronics Prototyping",
         "Automation Systems",
       ],
-      thumbnailPath: "/assets/project-thumbnails/rain.png",
+      thumbnailPath:"/assets/project-thumbnails/rain.png",
       githubUrl: "https://github.com/trushij/rain",
       liveUrl: "",
-      featured: false,
+      featured: true,
       year: "2025",
     },
 
