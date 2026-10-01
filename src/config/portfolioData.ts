@@ -328,7 +328,7 @@ export const portfolioData: PortfolioConfig = {
       issuer: "UNSTOP",
       date: "2026",
       credentialUrl: "",
-      image: "/assets/certificates/Women-Who-Master.png",
+      image: "/assets/certificates/women-who-master.png",
       status: "Participation",
     },
      {
