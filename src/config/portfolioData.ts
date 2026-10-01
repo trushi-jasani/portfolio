@@ -30,7 +30,7 @@ export interface Certification {
   date: string;
   image: string;
   credentialUrl?: string;
-  status: "Completed" | "Participation";
+  status: "Completed" | "Participation" | "Top 1%";
 }
 
 export interface AboutSection {
@@ -313,13 +313,22 @@ export const portfolioData: PortfolioConfig = {
 
   ],
   certifications: [
+    {
+  id: "gssoc",
+  title: "GirlScript Summer of Code 2026 - Top 1% Global Contributor",
+  issuer: "GirlScript Foundation",
+  date: "2026",
+  credentialUrl: "",
+  image: "/assets/certificates/Gssoc.png",
+  status: "Top 1%",
+},
      {
       id: "hacthon",
       title: "Women Who Master - Hackthon",
       issuer: "UNSTOP",
       date: "2026",
       credentialUrl: "",
-      image: "/assets/certificates/women-who-master.png",
+      image: "/assets/certificates/Women-Who-Master.png",
       status: "Participation",
     },
      {
